@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vieldi — портфолио</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    box-sizing: border-box;
+    --bg: #14101c;
+    --surface: #1e1729;
+    --surface-2: #251c33;
+    --text: #f2eae0;
+    --text-dim: #a99fb0;
+    --accent: #e8a33d;
+    --accent-2: #5fb3a3;
+    --line: rgba(242,234,224,0.12);
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top: env(safe-area-inset-top, 0px);}
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a{color:inherit;}
+
+  .wrap{max-width: 1080px; margin: 0 auto; padding: 0 28px;}
+
+  header.top{
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: rgba(20,16,28,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar{display:flex; align-items:center; justify-content:space-between; padding: 18px 0;}
+  .logo{font-family:'Fraunces', serif; font-size: 1.2rem; font-weight:600; letter-spacing: -0.01em;}
+  .toplinks{display:flex; gap: 28px; font-size: 0.92rem; color: var(--text-dim);}
+  .toplinks a{text-decoration:none; transition: color .2s ease;}
+  .toplinks a:hover{color: var(--text);}
+
+  /* HERO */
+  .hero{padding: 96px 0 72px;}
+  .hero-kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--accent-2);
+    margin: 0 0 22px;
+  }
+  .hero-kicker .cursor{
+    display:inline-block; width: 8px; height: 1.1em; background: var(--accent-2);
+    margin-left: 2px; vertical-align: -2px;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity: 0; } }
+  h1.hero-title{
+    font-family:'Fraunces', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(2.4rem, 5.6vw, 4.3rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 28px;
+    max-width: 14ch;
+  }
+  h1.hero-title em{
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-sub{
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--text-dim);
+    max-width: 46ch;
+    margin: 0 0 36px;
+  }
+  .hero-cta{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap: 8px;
+    padding: 13px 24px;
+    border-radius: 3px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration:none;
+    border: 1px solid transparent;
+    transition: transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn-primary{ background: var(--accent); color: #1a1410; }
+  .btn-primary:hover{ transform: translateY(-2px); }
+  .btn-ghost{ border-color: var(--line); color: var(--text); }
+  .btn-ghost:hover{ border-color: var(--text-dim); }
+
+  /* SECTION HEADS */
+  .section{padding: 64px 0;}
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between; gap: 24px;
+    margin-bottom: 44px; border-bottom: 1px solid var(--line); padding-bottom: 22px;
+  }
+  h2.section-title{
+    font-family:'Fraunces', serif; font-weight: 400; font-size: 1.9rem; margin: 0;
+  }
+  .section-note{ color: var(--text-dim); font-size: 0.92rem; max-width: 30ch; text-align: right;}
+
+  /* PROJECTS */
+  .projects{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .card{
+    position: relative;
+    border-radius: 4px;
+    padding: 32px 28px;
+    min-height: 240px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    border: 1px solid var(--line);
+    overflow:hidden;
+    transition: border-color .2s ease;
+  }
+  .card:hover{ border-color: var(--accent-2); }
+  .card-01{ background: linear-gradient(160deg, #2a1f1a 0%, var(--surface) 60%); }
+  .card-02{ background: linear-gradient(160deg, #17262a 0%, var(--surface) 60%); }
+  .card-03{ background: linear-gradient(160deg, #241f2f 0%, var(--surface) 60%); }
+  .card-04{ background: linear-gradient(160deg, #2a1a26 0%, var(--surface) 60%); }
+  .card-icon{ width: 34px; height: 34px; opacity: 0.9; }
+  .card-icon svg{ width:100%; height:100%; stroke: var(--text); fill:none; stroke-width:1.4; }
+  .card-body{ margin-top: 22px; }
+  .card-tag{ font-family:'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--text-dim); margin: 0 0 8px;}
+  .card-title{ font-family:'Fraunces', serif; font-size: 1.5rem; font-weight: 500; margin: 0 0 10px;}
+  .card-desc{ font-size: 0.94rem; color: var(--text-dim); line-height: 1.55; margin: 0 0 20px; max-width: 42ch;}
+  .card-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size: 0.9rem; font-weight: 500; text-decoration:none; color: var(--text);
+    padding-bottom: 2px; border-bottom: 1px solid var(--line);
+    width: fit-content;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .card-link:hover{ border-color: var(--accent); color: var(--accent); }
+  .card-link svg{ width: 14px; height: 14px; transition: transform .2s ease; }
+  .card-link:hover svg{ transform: translate(2px, -2px); }
+
+  @media (max-width: 720px){
+    .projects{ grid-template-columns: 1fr; }
+    .section-head{ flex-direction:column; align-items:flex-start; }
+    .section-note{ text-align:left; }
+  }
+
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items:start; }
+  .about-text{ font-size: 1.02rem; line-height: 1.75; color: var(--text-dim); max-width: 58ch; }
+  .about-text p{ margin: 0 0 18px; }
+  .stack-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap: 10px; }
+  .stack-list li{
+    display:flex; justify-content:space-between; padding: 10px 0;
+    border-bottom: 1px solid var(--line); font-size: 0.92rem;
+  }
+  .stack-list span:first-child{ color: var(--text); }
+  .stack-list span:last-child{ color: var(--text-dim); font-family:'IBM Plex Mono', monospace; font-size: 0.82rem;}
+  @media (max-width: 720px){ .about-grid{ grid-template-columns: 1fr; } }
+
+  /* CONTACT / FOOTER */
+  footer{ border-top: 1px solid var(--line); padding: 56px 0 40px; }
+  .contact-title{
+    font-family:'Fraunces', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 28px; max-width: 16ch;
+  }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 16px; margin-top: 40px; }
+  .foot-note{ color: var(--text-dim); font-size: 0.85rem; }
+
+  :focus-visible{ outline: 2px solid var(--accent-2); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce){
+    .hero-kicker .cursor{ animation: none; }
+    *{ transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap topbar">
+    <div class="logo">Vieldi</div>
+    <nav class="toplinks">
+      <a href="#work">Работы</a>
+      <a href="#about">Обо мне</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="hero-kicker">$ User detected<span class="cursor"></span></p>
+    <h1 class="hero-title">Собираю сайты<br>и приложения, <em>которые</em><br>решают задачу</h1>
+    <p class="hero-sub">Начинающий разработчик из Кыргызстана. Делаю сайты, лендинги и веб-приложения — от идеи до рабочей ссылки</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#work">Смотреть работы</a>
+      <a class="btn btn-ghost" href="#contact">Связаться</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Избранные работы</h2>
+      <p class="section-note">Четыре проекта из разных сфер — от услуг до e-commerce</p>
+    </div>
+
+    <div class="projects">
+
+      <div class="card card-01">
+        <div>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M6 6a3 3 0 1 0 0 0.001zM6 18a3 3 0 1 0 0 0.001zM19 5L7.5 12M19 19L7.5 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">услуги · запись</p>
+            <h3 class="card-title">Парикмахерская</h3>
+            <p class="card-desc">Сайт-визитка с прайсом, портфолио мастеров и формой записи на стрижку</p>
+          </div>
+        </div>
+        <a class="card-link" href="https://odd1sout-lab.github.io/barbershopmappa/" target="_blank" rel="noopener">
+          Открыть проект
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="card card-02">
+        <div>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 12l4-8h10l4 8-9 9-9-9z" stroke-linejoin="round"/><path d="M3 12h18" /></svg>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">туризм · Каракол</p>
+            <h3 class="card-title">Тур в Каракол</h3>
+            <p class="card-desc">Лендинг для турпакета: маршрут, галерея гор и озера, кнопка бронирования тура</p>
+          </div>
+        </div>
+        <a class="card-link" href="https://odd1sout-lab.github.io/karakol-tour/" target="_blank" rel="noopener">
+          Открыть проект
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="card card-03">
+        <div>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M8 10l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 15h6" stroke-linecap="round"/></svg>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">продуктивность · web-app</p>
+            <h3 class="card-title">To-Do лист</h3>
+            <p class="card-desc">Приложение для задач: списки, отметки выполнения, хранение прямо в браузере с котиками</p>
+          </div>
+        </div>
+        <a class="card-link" href="https://odd1sout-lab.github.io/todo-cat-app/" target="_blank" rel="noopener">
+          Открыть проект
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="card card-04">
+        <div>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 4l3 2 3-2 3 3-2 2v11H8V9L6 7z" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">e-commerce · одежда</p>
+            <h3 class="card-title">Homeland — магазин одежды</h3>
+            <p class="card-desc">Каталог товаров, цены в сомах и оформление заказа прямо через WhatsApp</p>
+          </div>
+        </div>
+        <a class="card-link" href="https://odd1sout-lab.github.io/homeland/" target="_blank" rel="noopener">
+          Открыть проект
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Обо мне</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Я делаю сайты и веб-приложения под конкретную задачу клиента — будь то запись в парикмахерскую, продажа тура или витрина магазина одежды</p>
+        <p>Работаю быстро, довожу проект до готовой ссылки, и стараюсь сделать максимально выгодно для клиента</p>
+      </div>
+      <ul class="stack-list">
+        <li><span>Frontend</span><span>HTML / CSS / JS</span></li>
+        <li><span>Фреймворки</span><span>React, Bootstrap 5</span></li>
+        <li><span>Интеграции</span><span>WhatsApp, API</span></li>
+        <li><span>Языки</span><span>RU, EN</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 class="contact-title">Буду рад помочь вам <br> Контакты:</h2>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="mailto:eldan.ybyshev@gmail.com">Написать на почту</a>
+      <a class="btn btn-ghost" href="https://t.me/VieldiDakota">Telegram</a>
+    </div>
+    <div class="foot-row">
+      <span class="foot-note">Vieldi Dakota</span>
+      <span class="foot-note">Кыргызстан</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
